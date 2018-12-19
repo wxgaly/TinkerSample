@@ -33,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         TextView tv_content = findViewById(R.id.tv_content);
-        tv_content.setText("修复了----------！！！！！");
+        tv_content.setText("测试再次修复-！@#￥%……%……Z");
+
+        tv_content.setText(tv_content.getText() + "\n 不能再次在原版基础上修复吗");
+        tv_content.setText(tv_content.getText() + "\n 测试在上次patch包打完之后，不能在这一版基础上修复吗");
+        tv_content.setText(tv_content.getText() + "\n 看来真的不行，必须拿第一版作为基础");
+        tv_content.setText(tv_content.getText() + "\n 不过这样大部分情况下不发布新的包，都只需要拿第一个包做基础就行");
+        tv_content.setText(tv_content.getText() + "\n 测试重命名");
     }
 }

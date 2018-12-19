@@ -60,6 +60,17 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+
+    tasks.whenTaskAdded { task ->
+        if ("tinkerPatchDebug".equalsIgnoreCase(task.name)) {
+            task.doLast {
+                println("将 ${patchAPKName} 重命名为 ${patchName} --  " +
+                        "${file("${patchDebugPath}${patchAPKName}").renameTo(file("${patchDebugPath}${patchName}"))}")
+            }
+        }
+    }
+
 }
 
 def bakPath = file("${buildDir}/bakApk/")
@@ -70,14 +81,22 @@ ext {
 
     //for normal build
     //old apk file to build patch apk
-    tinkerOldApkPath = "${bakPath}/app-debug-1217-18-22-43.apk"
+    tinkerOldApkPath = "${bakPath}/app-debug-1218-10-45-26.apk"
     //proguard mapping file to build patch apk
-    tinkerApplyMappingPath = "${bakPath}/app-debug-1217-18-22-43-mapping.txt"
+    tinkerApplyMappingPath = "${bakPath}/app-debug-1218-10-45-26-mapping.txt"
     //resource R.txt to build patch apk, must input if there is resource changed
-    tinkerApplyResourcePath = "${bakPath}/app-debug-1217-18-22-43-R.txt"
+    tinkerApplyResourcePath = "${bakPath}/app-debug-1218-10-45-26-R.txt"
 
     //only use for build all flavor, if not, just ignore this field
-    tinkerBuildFlavorDirectory = "${bakPath}/app-1217-18-22-43"
+    tinkerBuildFlavorDirectory = "${bakPath}/app-1218-10-45-26"
+
+    patchAPKName = "patch_signed_7zip.apk"
+
+    patchName = "patch.patch"
+
+    patchDebugPath = "${buildDir}/outputs/apk/tinkerPatch/debug/"
+
+    patchReleasePath = "${buildDir}/outputs/apk/tinkerPatch/release/"
 }
 
 def getOldApkPath() {
@@ -411,6 +430,7 @@ task sortPublicTxt() {
         sortedLines.each {
             sortedFile.append("${it}\n")
         }
+        println("任务最后执行------------------")
     }
 }
 
