@@ -430,7 +430,6 @@ task sortPublicTxt() {
         sortedLines.each {
             sortedFile.append("${it}\n")
         }
-        println("任务最后执行------------------")
     }
 }
 
